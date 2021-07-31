@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyledNanv,
   StyledButton,
   StyledBurger,
+  StyledMenu,
+  StyleHomeUrl,
   StyledSearchBox,
   StyledIconsBox,
   StyledToggle,
@@ -10,10 +12,23 @@ import {
 } from './YoutubeNav.styles';
 
 function Nav() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setMenuOpen((prev) => !prev);
+  };
+  const renderMenu = () => {
+    return (
+      <StyledMenu>
+        <StyleHomeUrl>HOME</StyleHomeUrl>
+      </StyledMenu>
+    );
+  };
+
   return (
     <StyledNanv>
-      <StyledButton type="button">
+      <StyledButton type="button" onClick={toggleMenu}>
         <StyledBurger className="fas fa-bars" />
+        {menuOpen ? renderMenu() : null}
       </StyledButton>
       <div>
         <StyledSearchBox type="text" placeholder="Search..." />

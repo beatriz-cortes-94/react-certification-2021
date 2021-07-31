@@ -5,7 +5,7 @@ const StyledNanv = styled.nav`
   padding-top: 15px;
   padding-bottom: 15px;
   background-color: #c72c48;
-  min-height: 64px;
+  height: 64px;
 `;
 
 const StyledButton = styled.button`
@@ -20,6 +20,22 @@ const StyledButton = styled.button`
 
 const StyledBurger = styled.i`
   font-size: 30px;
+`;
+
+const StyledMenu = styled.div`
+  position: fixed;
+  z-index: 1;
+  top: 64px;
+  left: 0;
+  height: 100vh;
+  width: 400px;
+  padding: 25px;
+  background: #ffffff;
+`;
+
+const StyleHomeUrl = styled.a`
+  color: black;
+  font-size: 20px;
 `;
 
 const StyledSearchBox = styled.input`
@@ -75,6 +91,8 @@ export {
   StyledNanv,
   StyledButton,
   StyledBurger,
+  StyledMenu,
+  StyleHomeUrl,
   StyledSearchBox,
   StyledIconsBox,
   StyledToggle,

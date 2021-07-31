@@ -5,8 +5,8 @@ import Nav from './YoutubeNav.component';
 describe('Nav elements', () => {
   test('must display navbar', () => {
     render(<Nav />);
-    const icons = screen.getAllByRole('navigation');
-    expect(icons).toHaveLength(1);
+    const icons = screen.getByRole('navigation');
+    expect(icons).toBeInTheDocument();
   });
   test('must display hamburger menu', () => {
     render(<Nav />);

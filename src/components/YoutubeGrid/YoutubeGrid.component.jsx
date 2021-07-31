@@ -6,7 +6,7 @@ import { StyledGrid } from './YoutubeGrid.styles';
 function Grid() {
   const videosInfo = data.items;
   const videosGrid = videosInfo.slice(1).map((video) => {
-    return <Card key={video.snippet.title} videoInfo={video} />;
+    return <Card key={video.snippet.title} videoInfo={video.snippet} />;
   });
 
   return <StyledGrid> {videosGrid} </StyledGrid>;
