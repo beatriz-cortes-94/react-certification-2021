@@ -1,19 +1,26 @@
 import React from 'react';
-import VideoDetails from '../../components/YoutubeVideoPlayer/YoutubeVideoPlayer.component';
+import VideoPlayer from '../../components/YoutubeVideoPlayer/YoutubeVideoPlayer.component';
 import RelatedVideos from '../../components/YoutubeRelatedVideos/YoutubeRelatedVideos.component';
 import { StyledGrid } from './YoutubeVideoDetails.styles';
 
-function VideoPlayer() {
+function VideoDetails(props) {
+  const { videoInfo, relatedVideos, onVideoClick } = props;
+  const { id } = videoInfo;
+
   return (
     <div>
       <section>
         <StyledGrid>
-          <VideoDetails />
-          <RelatedVideos />
+          <VideoPlayer videoInfo={videoInfo} />
+          <RelatedVideos
+            relatedVideos={relatedVideos}
+            currentVideoId={id}
+            onVideoClick={onVideoClick}
+          />
         </StyledGrid>
       </section>
     </div>
   );
 }
 
-export default VideoPlayer;
+export default VideoDetails;

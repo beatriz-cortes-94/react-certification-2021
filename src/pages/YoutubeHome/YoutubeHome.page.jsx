@@ -1,13 +1,14 @@
 import React from 'react';
-import Grid from '../../components/YoutubeGrid/YoutubeGrid.component';
+import VideoGrid from '../../components/YoutubeVideoGrid/YoutubeVideoGrid.component';
 import { StyledTitle } from './YoutubeHome.styles';
 
-function Home() {
+function Home(props) {
+  const { videoList, onVideoClick } = props;
   return (
     <div>
       <section>
         <StyledTitle>WELCOME TO WIZETUBE</StyledTitle>
-        <Grid />
+        <VideoGrid videoList={videoList} onVideoClick={onVideoClick} />
       </section>
     </div>
   );

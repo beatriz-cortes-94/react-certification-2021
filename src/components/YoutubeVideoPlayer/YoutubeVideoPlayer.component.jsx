@@ -5,19 +5,20 @@ import {
   StyledVideoDetails,
   StyledVideoTitle,
 } from './YoutubeVideoPlayer.styles';
-import data from '../../mock/youtube-videos-mock.json';
 
-function VideoPlayer() {
-  const videoInfo = data.items[2];
+function VideoPlayer(props) {
+  const { id, snippet } = props.videoInfo;
+  const { title, description } = snippet;
   return (
     <StyledContainer>
       <StyledVideoPlayer
-        src="https://www.youtube.com/embed/nmXMgqjQzls"
-        title={videoInfo.snippet.title}
+        src={`https://www.youtube.com/embed/${id.videoId}`}
+        title={title}
+        data-testid="video-player"
       />
       <StyledVideoDetails>
-        <StyledVideoTitle>{videoInfo.snippet.title}</StyledVideoTitle>
-        <p>{videoInfo.snippet.description}</p>
+        <StyledVideoTitle>{title}</StyledVideoTitle>
+        <p>{description}</p>
       </StyledVideoDetails>
     </StyledContainer>
   );
