@@ -7,14 +7,18 @@ import {
   CardDescription,
 } from './YoutubeCard.styles';
 
-function Card(video) {
-  const { videoInfo } = video;
+function Card(props) {
+  const { thumbnails, title, description, videoInfo, onVideoClick } = props;
   return (
-    <StyledVideoCard href="https://www.youtube.com/">
-      <CardImage background={videoInfo.snippet.thumbnails.high.url} />
+    <StyledVideoCard
+      onClick={() => {
+        onVideoClick(videoInfo);
+      }}
+    >
+      <CardImage background={thumbnails.high.url} />
       <CardInfo>
-        <CardTitle>{videoInfo.snippet.title}</CardTitle>
-        <CardDescription>{videoInfo.snippet.description}</CardDescription>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
       </CardInfo>
     </StyledVideoCard>
   );

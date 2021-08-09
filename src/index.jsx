@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import YoutubeApp from './components/YoutubeApp';
+import App from './components/App';
 import './global.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <YoutubeApp />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
