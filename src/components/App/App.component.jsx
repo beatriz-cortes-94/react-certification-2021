@@ -5,7 +5,7 @@ import VideoDetails from '../../pages/YoutubeVideoDetails/YoutubeVideoDetails.pa
 import useYoutubeApi from '../../api/useYoutubeApi';
 
 function YoutubeApp() {
-  const { results, fetchData } = useYoutubeApi();
+  const { error, loading, results, fetchData } = useYoutubeApi();
   const [isHomeView, setIsHomeView] = useState(true);
   const [videoInfo, setVideoInfo] = useState(null);
 
@@ -19,13 +19,19 @@ function YoutubeApp() {
     fetchData(query);
   };
 
-  const onVideoClick = (clickedVideoId) => {
+  const onVideoClick = (clickedVideo) => {
     window.scrollTo(0, 0);
     setIsHomeView(false);
-    setVideoInfo(clickedVideoId);
+    setVideoInfo(clickedVideo);
   };
 
   const renderViews = () => {
+    if (error !== '' && loading === false) {
+      return <h1>Ups! Something went wrong</h1>;
+    }
+    if (loading) {
+      return <h1>Loading...</h1>;
+    }
     if (isHomeView && results) {
       return <Home videoList={results} onVideoClick={onVideoClick} />;
     }

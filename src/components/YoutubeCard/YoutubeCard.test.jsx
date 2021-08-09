@@ -9,12 +9,26 @@ const description =
 
 describe('card', () => {
   test('must display title', () => {
-    render(<Card videoInfo={data.items[1]} />);
+    render(
+      <Card
+        thumbnails={data.items[1].snippet.thumbnails}
+        title={data.items[1].snippet.title}
+        description={data.items[1].snippet.description}
+        videoInfo={data.items[1]}
+      />
+    );
     const titleElement = screen.getByText(title);
     expect(titleElement).toBeInTheDocument();
   });
   test('must display video information', () => {
-    render(<Card videoInfo={data.items[1]} />);
+    render(
+      <Card
+        thumbnails={data.items[1].snippet.thumbnails}
+        title={data.items[1].snippet.title}
+        description={data.items[1].snippet.description}
+        videoInfo={data.items[1]}
+      />
+    );
     const infoElement = screen.getByText(description);
     expect(infoElement).toBeInTheDocument();
   });

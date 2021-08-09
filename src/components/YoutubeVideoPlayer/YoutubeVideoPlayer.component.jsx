@@ -7,8 +7,7 @@ import {
 } from './YoutubeVideoPlayer.styles';
 
 function VideoPlayer(props) {
-  const { id, snippet } = props.videoInfo;
-  const { title, description } = snippet;
+  const { id, title, description } = props;
   return (
     <StyledContainer>
       <StyledVideoPlayer

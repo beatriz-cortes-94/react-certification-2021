@@ -5,13 +5,13 @@ import { StyledGrid } from './YoutubeVideoDetails.styles';
 
 function VideoDetails(props) {
   const { videoInfo, relatedVideos, onVideoClick } = props;
-  const { id } = videoInfo;
+  const { id, snippet } = videoInfo;
 
   return (
     <div>
       <section>
         <StyledGrid>
-          <VideoPlayer videoInfo={videoInfo} />
+          <VideoPlayer id={id} title={snippet.title} description={snippet.description} />
           <RelatedVideos
             relatedVideos={relatedVideos}
             currentVideoId={id}

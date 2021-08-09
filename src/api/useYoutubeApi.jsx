@@ -1,22 +1,30 @@
 import { useState } from 'react';
 
 const useYoutubeApi = () => {
-  const KEY = 'AIzaSyBu9PLyHpHNTJuESfCvKYqYf1eEgEaJ2EI';
+  const KEY = process.env.REACT_APP_API_KEY;
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
   const [results, setResults] = useState(null);
   const fetchData = (query) => {
+    setLoading(true);
     fetch(
       `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=24&q=${query}&key=${KEY}`
     )
       .then((res) => res.json())
       .then((result) => {
         setResults(result);
+        setLoading(false);
+        setError('');
       }, [])
-      .catch((error) => {
+      .catch((e) => {
+        setError(`API error: ${e}`);
         console.error(error);
       });
   };
 
   return {
+    error,
+    loading,
     results,
     fetchData,
   };

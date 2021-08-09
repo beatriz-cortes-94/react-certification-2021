@@ -8,9 +8,7 @@ import {
 } from './YoutubeCard.styles';
 
 function Card(props) {
-  const { videoInfo, onVideoClick } = props;
-  const { thumbnails, title, description } = videoInfo.snippet;
-
+  const { thumbnails, title, description, videoInfo, onVideoClick } = props;
   return (
     <StyledVideoCard
       onClick={() => {
