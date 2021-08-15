@@ -3,8 +3,11 @@ import Nav from '../YoutubeNav/YoutubeNav.component';
 import Home from '../../pages/YoutubeHome/YoutubeHome.page';
 import VideoDetails from '../../pages/YoutubeVideoDetails/YoutubeVideoDetails.page';
 import useYoutubeApi from '../../api/useYoutubeApi';
+import ContextProvider, { useAppContext } from '../../context/ContextProvider';
+import { StyledApp } from './App.styles';
 
 function YoutubeApp() {
+  const { theme } = useAppContext();
   const { error, loading, results, fetchData } = useYoutubeApi();
   const [isHomeView, setIsHomeView] = useState(true);
   const [videoInfo, setVideoInfo] = useState(null);
@@ -15,8 +18,8 @@ function YoutubeApp() {
     }
   };
 
-  const onSearchSubmit = (query) => {
-    fetchData(query);
+  const onSearchSubmit = () => {
+    fetchData();
   };
 
   const onVideoClick = (clickedVideo) => {
@@ -47,22 +50,28 @@ function YoutubeApp() {
   };
 
   useEffect(() => {
-    fetchData('wizeline');
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     setIsHomeView(true);
-  }, [results]);
+  }, [results, setIsHomeView]);
 
   return (
-    <div>
+    <StyledApp isLightTheme={theme}>
       <header>
         <Nav handleMenuClick={handleMenuClick} onSearchSubmit={onSearchSubmit} />
       </header>
       <div>{renderViews()}</div>
-    </div>
+    </StyledApp>
   );
 }
 
-export default YoutubeApp;
+const YoutubeAppWrapper = () => (
+  <ContextProvider>
+    <YoutubeApp />
+  </ContextProvider>
+);
+
+export default YoutubeAppWrapper;

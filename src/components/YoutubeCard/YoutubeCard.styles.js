@@ -7,7 +7,7 @@ const StyledVideoCard = styled.a`
   height: 345px;
   margin: 25px;
   border-radius: 15px;
-  border-color: #c72c48;
+  border-color: ${({ isLightTheme }) => (isLightTheme ? `#c72c48` : `#ff4747`)};
   border-style: solid;
   border-width: 3px;
   font-weight: 400;
@@ -31,18 +31,17 @@ const CardImage = styled.div`
 
 const CardInfo = styled.div`
   margin: 10px;
+  color: ${({ isLightTheme }) => (isLightTheme ? `#6b5e62` : `#fffaf1`)};
 `;
 
 const CardTitle = styled.h2`
   font-size: 20px;
   text-align: left;
-  color: #6b5e62;
 `;
 
 const CardDescription = styled.p`
   font-size: 15px;
   text-align: left;
-  color: #6b5e62;
 `;
 
 export { StyledVideoCard, CardInfo, CardImage, CardTitle, CardDescription };

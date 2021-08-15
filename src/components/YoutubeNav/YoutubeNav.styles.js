@@ -4,7 +4,7 @@ const StyledNanv = styled.nav`
   display: flex;
   padding-top: 15px;
   padding-bottom: 15px;
-  background-color: #c72c48;
+  background-color: ${({ isLightTheme }) => (isLightTheme ? `#c72c48` : `#ff4747`)};
   height: 64px;
 `;
 
@@ -30,11 +30,11 @@ const StyledMenu = styled.div`
   height: 100vh;
   width: 400px;
   padding: 25px;
-  background: #ffffff;
+  background: ${({ isLightTheme }) => (isLightTheme ? `#c72c48` : `#ff4747`)};
 `;
 
 const StyleHomeUrl = styled.a`
-  color: black;
+  color: #fffaf1;
   font-size: 20px;
 `;
 
