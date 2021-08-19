@@ -4,6 +4,8 @@ import reducer from './Reducer';
 
 const initialState = {
   query: 'wizeline',
+  results: null,
+  clickedVideo: null,
   isLightTheme: true,
 };
 
@@ -28,6 +30,22 @@ const ContextProvider = ({ children }) => {
     dispatch(updateAction);
   }, []);
 
+  const updateResults = useCallback((results) => {
+    const updateAction = {
+      type: 'UPDATE_RESULTS',
+      payload: results,
+    };
+    dispatch(updateAction);
+  }, []);
+
+  const updateClickedVideo = useCallback((video) => {
+    const updateAction = {
+      type: 'UPDATE_VIDEO',
+      payload: video,
+    };
+    dispatch(updateAction);
+  }, []);
+
   const updateTheme = useCallback(() => {
     const updateAction = {
       type: 'UPDATE_THEME',
@@ -38,6 +56,10 @@ const ContextProvider = ({ children }) => {
   const value = {
     query: state.query,
     updateQuery,
+    results: state.results,
+    updateResults,
+    clickedVideo: state.clickedVideo,
+    updateClickedVideo,
     theme: state.isLightTheme,
     updateTheme,
   };

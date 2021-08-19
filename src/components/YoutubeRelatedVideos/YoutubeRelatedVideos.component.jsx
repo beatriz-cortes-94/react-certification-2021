@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAppContext } from '../../context/ContextProvider';
 import {
   StyledVideosList,
   RelatedVideosContainer,
@@ -7,7 +8,8 @@ import {
 } from './YoutubeRelatedVideos.styles';
 
 function RelatedVideos(props) {
-  const { relatedVideos, currentVideoId, onVideoClick } = props;
+  const { updateClickedVideo } = useAppContext();
+  const { relatedVideos, currentVideoId } = props;
   const videoCard = relatedVideos.items.slice(1).map((video) => {
     const { thumbnails, title } = video.snippet;
     const { videoId } = video.id;
@@ -20,8 +22,9 @@ function RelatedVideos(props) {
         <StyledVideoImg
           src={thumbnails.high.url}
           alt="img"
+          href="/videoDetails"
           onClick={() => {
-            onVideoClick(video);
+            updateClickedVideo(video);
           }}
         />
         <div>

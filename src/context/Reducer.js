@@ -5,6 +5,16 @@ export default (state, action) => {
         ...state,
         query: action.payload,
       };
+    case 'UPDATE_RESULTS':
+      return {
+        ...state,
+        results: action.payload,
+      };
+    case 'UPDATE_VIDEO':
+      return {
+        ...state,
+        clickedVideo: action.payload,
+      };
     case 'UPDATE_THEME':
       return {
         ...state,

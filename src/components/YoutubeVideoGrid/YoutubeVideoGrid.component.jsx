@@ -3,7 +3,7 @@ import Card from '../YoutubeCard/YoutubeCard.component';
 import { StyledGrid } from './YoutubeVideoGrid.styles';
 
 function VideoGrid(props) {
-  const { videoList, onVideoClick } = props;
+  const { videoList } = props;
   const videosGrid = videoList.items.slice(1).map((video) => {
     const { snippet } = video;
     return (
@@ -13,7 +13,6 @@ function VideoGrid(props) {
         title={snippet.title}
         description={snippet.description}
         videoInfo={video}
-        onVideoClick={onVideoClick}
       />
     );
   });

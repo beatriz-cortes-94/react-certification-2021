@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledNanv = styled.nav`
@@ -33,7 +34,7 @@ const StyledMenu = styled.div`
   background: ${({ isLightTheme }) => (isLightTheme ? `#c72c48` : `#ff4747`)};
 `;
 
-const StyleHomeUrl = styled.a`
+const StyleHomeUrl = styled(Link)`
   color: #fffaf1;
   font-size: 20px;
 `;

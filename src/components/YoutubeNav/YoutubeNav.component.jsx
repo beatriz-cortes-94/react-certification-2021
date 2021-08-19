@@ -14,7 +14,7 @@ import {
 
 function Nav(props) {
   const { updateQuery, updateTheme, theme } = useAppContext();
-  const { handleMenuClick, onSearchSubmit } = props;
+  const { onSearchSubmit } = props;
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -24,7 +24,7 @@ function Nav(props) {
   const renderMenu = () => {
     return (
       <StyledMenu isLightTheme={theme}>
-        <StyleHomeUrl isLightTheme={theme} onClick={handleMenuClick}>
+        <StyleHomeUrl isLightTheme={theme} to="/">
           HOME
         </StyleHomeUrl>
       </StyledMenu>

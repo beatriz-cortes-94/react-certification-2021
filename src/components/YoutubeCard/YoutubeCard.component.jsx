@@ -10,14 +10,15 @@ import {
 } from './YoutubeCard.styles';
 
 function Card(props) {
-  const { theme } = useAppContext();
-  const { thumbnails, title, description, videoInfo, onVideoClick } = props;
+  const { theme, updateClickedVideo } = useAppContext();
+  const { thumbnails, title, description, videoInfo } = props;
   return (
     <StyledVideoCard
       isLightTheme={theme}
       onClick={() => {
-        onVideoClick(videoInfo);
+        updateClickedVideo(videoInfo);
       }}
+      to="/videoDetails"
     >
       <CardImage background={thumbnails.high.url} />
       <CardInfo isLightTheme={theme}>
