@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAppContext } from '../../context/ContextProvider';
 import {
   StyledNanv,
   StyledButton,
@@ -12,9 +13,9 @@ import {
 } from './YoutubeNav.styles';
 
 function Nav(props) {
+  const { updateQuery, updateTheme, theme } = useAppContext();
   const { handleMenuClick, onSearchSubmit } = props;
   const [menuOpen, setMenuOpen] = useState(false);
-  const [query, setQuery] = useState('');
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
@@ -22,23 +23,29 @@ function Nav(props) {
 
   const renderMenu = () => {
     return (
-      <StyledMenu>
-        <StyleHomeUrl onClick={handleMenuClick}>HOME</StyleHomeUrl>
+      <StyledMenu isLightTheme={theme}>
+        <StyleHomeUrl isLightTheme={theme} onClick={handleMenuClick}>
+          HOME
+        </StyleHomeUrl>
       </StyledMenu>
     );
   };
 
   const handleChange = (e) => {
-    setQuery(e.target.value);
+    updateQuery(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearchSubmit(query);
+    onSearchSubmit();
+  };
+
+  const toggleTheme = () => {
+    updateTheme();
   };
 
   return (
-    <StyledNanv>
+    <StyledNanv isLightTheme={theme}>
       <StyledButton type="button" onClick={toggleMenu}>
         <StyledBurger className="fas fa-bars" />
         {menuOpen ? renderMenu() : null}
@@ -50,7 +57,9 @@ function Nav(props) {
       </div>
       <div />
       <StyledIconsBox>
-        <StyledToggle className="fas fa-toggle-off" />
+        <StyledButton type="button" onClick={toggleTheme}>
+          <StyledToggle className={theme ? 'fas fa-toggle-off' : 'fas fa-toggle-on'} />
+        </StyledButton>
         <StyledAvatar className="fas fa-user-circle" />
       </StyledIconsBox>
     </StyledNanv>
