@@ -1,12 +1,23 @@
 /* eslint-disable no-unused-vars */
-import React, { createContext, useReducer, useCallback, useContext } from 'react';
+import React, {
+  createContext,
+  useReducer,
+  useCallback,
+  useContext,
+  useEffect,
+} from 'react';
 import reducer from './Reducer';
+import { AUTH_STORAGE_KEY, AUTH_USER } from '../utils/constants';
+import { storage } from '../utils/storage';
 
 const initialState = {
   query: 'wizeline',
   results: null,
   clickedVideo: null,
   isLightTheme: true,
+  isAuthenticated: false,
+  userInfo: null,
+  favorites: [],
 };
 
 const AppContext = createContext();
@@ -53,6 +64,31 @@ const ContextProvider = ({ children }) => {
     dispatch(updateAction);
   }, []);
 
+  const updateAuthentication = useCallback((isLogin, userInfo) => {
+    const updateAction = {
+      type: 'UPDATE_AUTHENTICATION',
+      payload: isLogin,
+      info: userInfo,
+    };
+    dispatch(updateAction);
+  }, []);
+
+  const updateFavorites = useCallback((video) => {
+    const updateAction = {
+      type: 'UPDATE_FAVORITES',
+      payload: video,
+    };
+    dispatch(updateAction);
+  }, []);
+
+  useEffect(() => {
+    const lastAuthState = storage.get(AUTH_STORAGE_KEY);
+    const isAuthenticated = Boolean(lastAuthState);
+    const userInfo = storage.get(AUTH_USER);
+    updateAuthentication(isAuthenticated, userInfo);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const value = {
     query: state.query,
     updateQuery,
@@ -62,6 +98,10 @@ const ContextProvider = ({ children }) => {
     updateClickedVideo,
     theme: state.isLightTheme,
     updateTheme,
+    isAuthenticated: state.isAuthenticated,
+    updateAuthentication,
+    favorites: state.favorites,
+    updateFavorites,
   };
 
   return <AppContext.Provider value={value}> {children} </AppContext.Provider>;

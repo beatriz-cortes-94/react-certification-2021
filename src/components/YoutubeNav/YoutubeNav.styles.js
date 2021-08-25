@@ -88,6 +88,31 @@ const StyledAvatar = styled.i`
   }
 `;
 
+const StyledAvatarMenu = styled.div`
+  border-radius: 5px;
+`;
+
+const StyledAvatarMenuButton = styled.div`
+  background-color: transparent;
+  border: transparent;
+`;
+
+const StyledAvatarMenuList = styled.ul`
+  background-color: ${({ isLightTheme }) => (isLightTheme ? `#c72c48` : `#ff4747`)};
+  border: transparent;
+  color: #fffaf1;
+  font-size: 22px;
+  padding: 10px 0;
+  font-weight: 500;
+  margin: 0 -24px 0 0;
+`;
+
+const StyledAvatarMenuItem = styled.li`
+  text-align: center;
+  list-style-type: none;
+  padding: 0;
+`;
+
 export {
   StyledNanv,
   StyledButton,
@@ -98,4 +123,8 @@ export {
   StyledIconsBox,
   StyledToggle,
   StyledAvatar,
+  StyledAvatarMenu,
+  StyledAvatarMenuButton,
+  StyledAvatarMenuList,
+  StyledAvatarMenuItem,
 };
