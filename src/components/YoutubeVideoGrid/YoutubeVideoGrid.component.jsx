@@ -4,6 +4,7 @@ import { StyledGrid } from './YoutubeVideoGrid.styles';
 
 function VideoGrid(props) {
   const { videoList } = props;
+  console.log(videoList);
   const videosGrid = videoList.items.slice(1).map((video) => {
     const { snippet } = video;
     return (

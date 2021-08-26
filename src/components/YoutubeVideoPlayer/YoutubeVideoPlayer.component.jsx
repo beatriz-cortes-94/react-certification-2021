@@ -11,12 +11,18 @@ import {
 } from './YoutubeVideoPlayer.styles';
 
 function VideoPlayer(props) {
-  const { theme, isAuthenticated } = useAppContext();
+  const { theme, isAuthenticated, favorites, updateFavorites } = useAppContext();
   const { id, title, description } = props;
   const [isFavorite, setIsFavorite] = useState(false);
 
+  const updateFavoritesList = () => {
+    updateFavorites(!isFavorite);
+    setIsFavorite(!isFavorite);
+  };
+
   useEffect(() => {
-    setIsFavorite(false);
+    const isVideoFavorite = favorites.length > 0 && favorites.get(id);
+    setIsFavorite(isVideoFavorite);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -30,7 +36,7 @@ function VideoPlayer(props) {
       <StyledVideoDetails>
         <StyledTitleFavBox>
           {isAuthenticated && (
-            <StyledButton>
+            <StyledButton onClick={updateFavoritesList}>
               <StyledFavorite
                 className={isFavorite ? 'fas fa-star' : 'far fa-star'}
                 isLightTheme={theme}

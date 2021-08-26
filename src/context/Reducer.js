@@ -33,14 +33,20 @@ export default (state, action) => {
         isAuthenticated: action.payload,
         userInfo: action.info,
       };
-    case 'UPDATE_FAVORITES':
+    case 'UPDATE_FAVORITES': {
       // eslint-disable-next-line no-case-declarations
-      const copyFavorites = [...state.favorites];
-      copyFavorites.push(action.payload);
+      const copyFavorites = new Map(state.favorites);
+      const id = state.clickedVideo.id.videoId;
+      if (action.payload) {
+        copyFavorites.set(id, state.clickedVideo);
+      } else {
+        copyFavorites.delete(id);
+      }
       return {
         ...state,
         favorites: copyFavorites,
       };
+    }
     default:
       return state;
   }

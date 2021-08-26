@@ -17,7 +17,7 @@ const initialState = {
   isLightTheme: true,
   isAuthenticated: false,
   userInfo: null,
-  favorites: [],
+  favorites: new Map(),
 };
 
 const AppContext = createContext();
@@ -73,10 +73,10 @@ const ContextProvider = ({ children }) => {
     dispatch(updateAction);
   }, []);
 
-  const updateFavorites = useCallback((video) => {
+  const updateFavorites = useCallback((isFavorite) => {
     const updateAction = {
       type: 'UPDATE_FAVORITES',
-      payload: video,
+      payload: isFavorite,
     };
     dispatch(updateAction);
   }, []);
