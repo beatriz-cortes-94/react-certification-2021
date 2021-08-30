@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useAppContext } from '../../context/ContextProvider';
 import {
   StyledContainer,
@@ -13,18 +13,10 @@ import {
 function VideoPlayer(props) {
   const { theme, isAuthenticated, favorites, updateFavorites } = useAppContext();
   const { id, title, description } = props;
-  const [isFavorite, setIsFavorite] = useState(false);
 
   const updateFavoritesList = () => {
-    updateFavorites(!isFavorite);
-    setIsFavorite(!isFavorite);
+    updateFavorites(id);
   };
-
-  useEffect(() => {
-    const isVideoFavorite = favorites.length > 0 && favorites.get(id);
-    setIsFavorite(isVideoFavorite);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <StyledContainer>
@@ -38,7 +30,7 @@ function VideoPlayer(props) {
           {isAuthenticated && (
             <StyledButton onClick={updateFavoritesList}>
               <StyledFavorite
-                className={isFavorite ? 'fas fa-star' : 'far fa-star'}
+                className={favorites.get(id) ? 'fas fa-star' : 'far fa-star'}
                 isLightTheme={theme}
               />
             </StyledButton>

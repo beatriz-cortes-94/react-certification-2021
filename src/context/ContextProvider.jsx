@@ -73,10 +73,10 @@ const ContextProvider = ({ children }) => {
     dispatch(updateAction);
   }, []);
 
-  const updateFavorites = useCallback((isFavorite) => {
+  const updateFavorites = useCallback((videoId) => {
     const updateAction = {
       type: 'UPDATE_FAVORITES',
-      payload: isFavorite,
+      payload: videoId,
     };
     dispatch(updateAction);
   }, []);

@@ -6,16 +6,11 @@ import { StyledTitle } from './YoutubeFavorites.styles';
 function Favorites() {
   const { favorites } = useAppContext();
 
-  const videoList = () => {
-    console.log(favorites.values());
-    return favorites;
-  };
-
   return (
     <div>
       <section>
         <StyledTitle>FAVORITES</StyledTitle>
-        {favorites.lenght > 0 && <VideoGrid videoList={videoList} />}
+        {favorites.lenght > 0 && <VideoGrid videoList={favorites} />}
       </section>
     </div>
   );

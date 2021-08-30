@@ -36,11 +36,12 @@ export default (state, action) => {
     case 'UPDATE_FAVORITES': {
       // eslint-disable-next-line no-case-declarations
       const copyFavorites = new Map(state.favorites);
-      const id = state.clickedVideo.id.videoId;
-      if (action.payload) {
-        copyFavorites.set(id, state.clickedVideo);
+      // if video id is not in map, we add it
+      // else we remove the video from map
+      if (!copyFavorites.get(action.payload)) {
+        copyFavorites.set(action.payload, state.clickedVideo);
       } else {
-        copyFavorites.delete(id);
+        copyFavorites.delete(action.payload);
       }
       return {
         ...state,
