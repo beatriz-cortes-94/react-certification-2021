@@ -1,51 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import Nav from '../YoutubeNav/YoutubeNav.component';
 import Home from '../../pages/YoutubeHome/YoutubeHome.page';
+import Favorites from '../../pages/YoutubeFavorites/YoutubeFavorites.page';
 import VideoDetails from '../../pages/YoutubeVideoDetails/YoutubeVideoDetails.page';
 import useYoutubeApi from '../../api/useYoutubeApi';
 import ContextProvider, { useAppContext } from '../../context/ContextProvider';
 import { StyledApp } from './App.styles';
 
 function YoutubeApp() {
-  const { theme } = useAppContext();
-  const { error, loading, results, fetchData } = useYoutubeApi();
-  const [isHomeView, setIsHomeView] = useState(true);
-  const [videoInfo, setVideoInfo] = useState(null);
+  const { results, theme } = useAppContext();
+  const { error, loading, fetchData } = useYoutubeApi();
 
-  const handleMenuClick = () => {
-    if (!isHomeView) {
-      setIsHomeView(true);
-    }
-  };
-
-  const onSearchSubmit = () => {
-    fetchData();
-  };
-
-  const onVideoClick = (clickedVideo) => {
-    window.scrollTo(0, 0);
-    setIsHomeView(false);
-    setVideoInfo(clickedVideo);
-  };
-
-  const renderViews = () => {
+  const renderHome = () => {
     if (error !== '' && loading === false) {
       return <h1>Ups! Something went wrong</h1>;
     }
     if (loading) {
       return <h1>Loading...</h1>;
     }
-    if (isHomeView && results) {
-      return <Home videoList={results} onVideoClick={onVideoClick} />;
-    }
-    if (!isHomeView) {
-      return (
-        <VideoDetails
-          videoInfo={videoInfo}
-          relatedVideos={results}
-          onVideoClick={onVideoClick}
-        />
-      );
+    if (results) {
+      return <Home videoList={results} />;
     }
   };
 
@@ -54,24 +29,32 @@ function YoutubeApp() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    setIsHomeView(true);
-  }, [results, setIsHomeView]);
-
   return (
     <StyledApp isLightTheme={theme}>
       <header>
-        <Nav handleMenuClick={handleMenuClick} onSearchSubmit={onSearchSubmit} />
+        <Nav />
       </header>
-      <div>{renderViews()}</div>
+      <Switch>
+        <Route exact path="/">
+          {renderHome()}
+        </Route>
+        <Route exact path="/videoDetails">
+          <VideoDetails />
+        </Route>
+        <Route exact path="/favorites">
+          <Favorites />
+        </Route>
+      </Switch>
     </StyledApp>
   );
 }
 
 const YoutubeAppWrapper = () => (
-  <ContextProvider>
-    <YoutubeApp />
-  </ContextProvider>
+  <HashRouter>
+    <ContextProvider>
+      <YoutubeApp />
+    </ContextProvider>
+  </HashRouter>
 );
 
 export default YoutubeAppWrapper;

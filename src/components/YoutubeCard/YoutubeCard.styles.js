@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyledVideoCard = styled.a`
+const StyledVideoCard = styled(Link)`
   display: block;
   position: relative;
   max-width: 345px;
