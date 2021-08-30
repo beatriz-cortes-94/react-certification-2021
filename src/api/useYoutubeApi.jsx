@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useAppContext } from '../context/ContextProvider';
-import data from '../mock/youtube-videos-mock.json';
 
 const useYoutubeApi = () => {
   const { query, updateResults } = useAppContext();
@@ -22,9 +21,6 @@ const useYoutubeApi = () => {
         setError(`API error: ${e}`);
         console.error(error);
       });
-    updateResults(data);
-    setLoading(false);
-    setError('');
   };
 
   return {
